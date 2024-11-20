@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Friend extends Time{
     @Id
+    @Column(name = "friend_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

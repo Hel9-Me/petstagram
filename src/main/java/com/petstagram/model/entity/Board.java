@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "board")
 public class Board extends Time{
     @Id
+    @Column(name="board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

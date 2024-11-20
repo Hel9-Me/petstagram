@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
-// @SpringBootApplication
+@SpringBootApplication
 @EnableJpaAuditing
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class PetstagramApplication {
 
 	public static void main(String[] args) {

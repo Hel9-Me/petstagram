@@ -2,6 +2,7 @@ package com.petstagram.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class User extends Time{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)
@@ -36,4 +37,10 @@ public class User extends Time{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Friend> friendList = new ArrayList<>();
 
+    public User(String name, String email, String password, Character useyn) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.useyn = useyn;
+    }
 }
