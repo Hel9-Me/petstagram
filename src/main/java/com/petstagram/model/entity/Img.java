@@ -1,13 +1,14 @@
 package com.petstagram.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@NoArgsConstructor
-@Table(name = "img")
 @Entity
+@Getter
+@Table(name = "img")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Img{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

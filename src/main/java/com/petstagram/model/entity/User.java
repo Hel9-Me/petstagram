@@ -1,16 +1,17 @@
 package com.petstagram.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
-@Table(name = "user")
 @Entity
+@Getter
+@Table(name = "user")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends Time{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
