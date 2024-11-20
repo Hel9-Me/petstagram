@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -42,6 +43,11 @@ public class AuthController {
         );
 
         HttpSession session = request.getSession();
+
+        if (session.getAttribute("USER_ID") != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 로그인 되었습니다.");
+        }
+
         session.setAttribute("USER_ID", loginUser.getId());
 
         return new ResponseEntity<>("로그인이 성공 했습니다. ",HttpStatus.OK);
