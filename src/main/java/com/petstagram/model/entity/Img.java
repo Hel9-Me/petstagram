@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Img{
     @Id
+    @Column(name = "image_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,6 +32,6 @@ public class Img{
 
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "board_id")
     private Board board;
 }

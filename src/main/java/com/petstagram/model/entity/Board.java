@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "board")
 public class Board extends Time{
     @Id
+    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,7 +25,7 @@ public class Board extends Time{
     private Character useryn;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
