@@ -20,7 +20,7 @@ public class AuthService {
 
         User user = new User(name, email, hashedPassword, 'Y');
 
-         userRepository.save(user);
+        userRepository.save(user);
     }
 
 
