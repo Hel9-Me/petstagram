@@ -1,3 +1,4 @@
+
 package com.petstagram.filter;
 
 import jakarta.servlet.*;
@@ -5,7 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.PatternMatchUtils;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
@@ -29,12 +32,12 @@ public class LoginFilter implements Filter {
 
                 log.warn("미인증 사용자 요청: {}", requestURI);
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
-                httpResponse.setContentType("application/json; charset=UTF-8");
+                httpResponse.setContentType("application/json");
+                httpResponse.setCharacterEncoding("UTF-8");
                 httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-                String responseMessage = "{\"message\": \"로그인이 필요합니다\"}";
+                String responseMessage = "로그인 후 시도 해주세요.";
                 httpResponse.getWriter().write(responseMessage);
-                httpResponse.getWriter().flush();  // 클라이언트로 바로 전송
                 return; // 요청 중단
             }
             log.info("로그인된 사용자 요청: {}", requestURI);
