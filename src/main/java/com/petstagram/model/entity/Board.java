@@ -1,5 +1,6 @@
 package com.petstagram.model.entity;
 
+import com.petstagram.model.dto.CreateBoardRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Board extends Time{
     private String content;
 
     @Column(nullable = false)
-    private Character useryn;
+    private Character useyn;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,4 +31,11 @@ public class Board extends Time{
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Img> imgList = new ArrayList<>();
+
+    public Board(CreateBoardRequestDto dto, User user) {
+        this.content = dto.getContent();
+        this.useyn = 'Y';
+        this.user = user;
+
+    }
 }
