@@ -1,4 +1,4 @@
-package com.petstagram.auth.util;
+package com.petstagram.util;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 

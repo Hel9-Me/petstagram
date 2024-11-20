@@ -1,4 +1,4 @@
-package com.petstagram.auth.filter;
+package com.petstagram.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

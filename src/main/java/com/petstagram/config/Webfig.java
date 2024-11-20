@@ -1,7 +1,7 @@
-package com.petstagram.auth.config;
+package com.petstagram.config;
 
 import jakarta.servlet.Filter;
-import com.petstagram.auth.filter.LoginFilter;
+import com.petstagram.filter.LoginFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

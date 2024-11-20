@@ -1,7 +1,7 @@
-package com.petstagram.auth.service;
+package com.petstagram.service;
 
-import com.petstagram.auth.repository.UserRepository;
-import com.petstagram.auth.util.PasswordEncoder;
+import com.petstagram.repository.UserRepository;
+import com.petstagram.util.PasswordEncoder;
 import com.petstagram.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

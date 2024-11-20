@@ -1,9 +1,8 @@
-package com.petstagram.auth.controller;
+package com.petstagram.controller;
 
 
-import com.petstagram.auth.dto.LoginRequestDto;
-import com.petstagram.auth.dto.SignUpRequestDto;
-import com.petstagram.auth.service.AuthService;
+import com.petstagram.service.AuthService;
+import com.petstagram.dto.ProfileResponseDto;
 import com.petstagram.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +22,7 @@ public class AuthController {
     private final AuthService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> singUp(@Valid @RequestBody SignUpRequestDto requestDto){
+    public ResponseEntity<String> singUp(@Valid @RequestBody ProfileResponseDto.SignUpRequestDto requestDto){
 
        userService.singUp(
                 requestDto.getName(),
@@ -35,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDto requestDto, HttpServletRequest request){
+    public ResponseEntity<String> login(@Valid @RequestBody ProfileResponseDto.LoginRequestDto requestDto, HttpServletRequest request){
 
         User loginUser = userService.login(
                 requestDto.getEmail(),
