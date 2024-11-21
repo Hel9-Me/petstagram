@@ -1,6 +1,5 @@
 package com.petstagram.service;
 
-import com.petstagram.dto.ProfileRequestDto;
 import com.petstagram.dto.ProfileResponseDto;
 import com.petstagram.model.entity.User;
 import com.petstagram.repository.UserRepository;
@@ -12,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class Userservice {
+public class UserService {
 
     private final UserRepository userRepository;
 
