@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
     private final BoardService service;
     @PostMapping
-    public ResponseEntity<BoardResponseDto> create(/*@SessionAttribute Long id,*/@Valid @RequestBody CreateBoardRequestDto dto) {
+    public ResponseEntity<BoardResponseDto> create(@SessionAttribute("USER_ID") Long id,@Valid @RequestBody CreateBoardRequestDto dto) {
 
-        Long id = 1L; //session 추가시 삭제하기
         BoardResponseDto responseDto = service.create(dto,id);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
