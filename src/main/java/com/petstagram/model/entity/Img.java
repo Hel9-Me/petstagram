@@ -1,5 +1,6 @@
 package com.petstagram.model.entity;
 
+import com.petstagram.model.entity.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,12 +29,11 @@ public class Img{
     private String ext;
 
     @Column(nullable = false)
-    private Character useyn;
+    private AccountStatus useyn;
 
     @Lob
     @Column(name = "img_data", length = 100)
     private byte[] imgData;
-
 
     @ManyToOne
     @JoinColumn(name = "board_id")

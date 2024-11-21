@@ -9,6 +9,7 @@ import com.petstagram.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class AuthController {
         return new ResponseEntity<>("로그인이 성공 했습니다. ",HttpStatus.OK);
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request){
 
         HttpSession session = request.getSession(false);
@@ -64,6 +65,21 @@ public class AuthController {
         }
 
         return new ResponseEntity<>("로그아웃이 되었습니다.", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/leave")
+    public ResponseEntity<String> leave(@SessionAttribute("USER_ID") Long userId, HttpServletRequest request){
+
+        userService.leave(userId);
+        log.info("{}", userId);
+
+        // 탈퇴 완료 후, 로그아웃 처리
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok().body("탈퇴가 완료되었습니다. 이용해 주셔서 감사합니다.");
     }
 }
 
