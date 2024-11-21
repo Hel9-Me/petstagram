@@ -29,7 +29,7 @@ public class UserController {
             @Valid @RequestBody ProfileRequestDto requestDto
     ){
 
-        ProfileResponseDto responseDto = userservice.updateProfile(id, requestDto.getNewName(), requestDto.getPassword(), requestDto.getNewPassword());
+        ProfileResponseDto responseDto = userservice.updateProfile(id, requestDto.getName(), requestDto.getPassword(), requestDto.getNewPassword());
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
