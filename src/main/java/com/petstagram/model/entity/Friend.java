@@ -9,16 +9,32 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "friend")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Friend extends Time{
+public class Friend extends Time {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "frined_id")
+    @JoinColumn(name = "friend_id", nullable = false)
     private User userFollower;
+
+    @Column(name = "is_accepted", nullable = false)
+    private boolean isAccepted = false;
+
+    public Friend(User user, User userFollower) {
+        this.user = user;
+        this.userFollower = userFollower;
+    }
+
+    public void accept() {
+        this.isAccepted = true;
+    }
 }
+
+
+
