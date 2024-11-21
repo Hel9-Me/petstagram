@@ -15,7 +15,7 @@ public class BoardResponseDto {
     Timestamp updated_at;
     String name;
     String email;
-    List<String> imgs;
+    List<String> imgNameList;
 
 
     public BoardResponseDto(Board board) {
@@ -24,5 +24,8 @@ public class BoardResponseDto {
         this.updated_at = board.getUpdatedAt();
         this.name = board.getUser().getName();
         this.email = board.getUser().getEmail();
+        this.imgNameList = board.getImgList().stream()
+                .map(m -> m.getName())
+                .toList();
     }
 }
