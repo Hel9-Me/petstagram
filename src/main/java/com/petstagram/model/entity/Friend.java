@@ -31,10 +31,10 @@ public class Friend extends Time {
         this.userFollower = userFollower;
     }
 
-    // 친구 요청 수락 처리
     public void accept() {
         this.isAccepted = true;
     }
 }
+
 
 
