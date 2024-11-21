@@ -1,4 +1,4 @@
-package com.petstagram.dto;
+package com.petstagram.dto.friend;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
