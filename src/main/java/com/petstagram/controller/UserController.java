@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    private final UserService userservice;
+    private final UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<ProfileResponseDto> getProfile(@PathVariable Long id) {
-        ProfileResponseDto responseDto = userservice.getProfile(id);
+        ProfileResponseDto responseDto = userService.getProfile(id);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
@@ -29,7 +29,7 @@ public class UserController {
             @Valid @RequestBody ProfileRequestDto requestDto
     ){
 
-        ProfileResponseDto responseDto = userservice.updateProfile(id, requestDto.getName(), requestDto.getPassword(), requestDto.getNewPassword());
+        ProfileResponseDto responseDto = userService.updateProfile(id, requestDto.getNewName(), requestDto.getPassword(), requestDto.getNewPassword());
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

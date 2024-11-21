@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     public ProfileResponseDto getProfile(Long id) {
-        User finduser = userRepository.findByIdOrElseThrows(id);
-        return new ProfileResponseDto(finduser);
+        User findUser = userRepository.findByIdOrElseThrows(id);
+        return new ProfileResponseDto(findUser);
     }
 
     public ProfileResponseDto updateProfile(Long id, String newName, String password, String newPassword) {
