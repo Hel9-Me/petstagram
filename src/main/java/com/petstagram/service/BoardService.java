@@ -1,7 +1,7 @@
 package com.petstagram.service;
 
-import com.petstagram.model.dto.BoardResponseDto;
-import com.petstagram.model.dto.CreateBoardRequestDto;
+import com.petstagram.dto.board.BoardResponseDto;
+import com.petstagram.dto.board.CreateBoardRequestDto;
 import org.springframework.data.domain.Page;
 
 public interface BoardService {

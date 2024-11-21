@@ -1,15 +1,13 @@
 package com.petstagram.controller;
 
 
-import com.petstagram.dto.LoginRequestDto;
-import com.petstagram.dto.SignUpRequestDto;
+import com.petstagram.dto.auth.LoginRequestDto;
+import com.petstagram.dto.auth.SignUpRequestDto;
 import com.petstagram.service.AuthService;
-import com.petstagram.dto.ProfileResponseDto;
 import com.petstagram.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
-
 
     private final AuthService userService;
 

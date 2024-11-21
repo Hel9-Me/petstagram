@@ -1,8 +1,8 @@
 package com.petstagram.controller;
 
-import com.petstagram.dto.FriendAcceptDto;
-import com.petstagram.dto.FriendRequestDto;
-import com.petstagram.dto.FriendResponseDto;
+import com.petstagram.dto.friend.FriendAcceptDto;
+import com.petstagram.dto.friend.FriendRequestDto;
+import com.petstagram.dto.friend.FriendResponseDto;
 import com.petstagram.service.FriendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
