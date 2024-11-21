@@ -29,5 +29,12 @@ public class BoardServiceImp implements BoardService {
         return new BoardResponseDto(savedBoard);
     }
 
+    @Override
+    public Page<BoardResponseDto> find(Long id, int page) {
+        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("updatedAt"));
+        Page<BoardResponseDto> boardResponseDtoPage = boardRepository.findAllByUserId(id, pageRequest).map(m -> new BoardResponseDto(m));
+
+        return boardResponseDtoPage;
+    }
 
 }
