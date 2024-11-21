@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class Img{
     @Column(nullable = false)
     private String saved_name;
 
-//    @Value("${img.path}")
+    @Value("${img.path}") //todo 적용 안되는 문제 확인하기
     private String path;
 
     @Column(nullable = false)

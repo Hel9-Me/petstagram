@@ -26,16 +26,14 @@ public class BoardController {
 
     @PostMapping
     public ResponseEntity<BoardResponseDto> create(@SessionAttribute("USER_ID") Long id,
-                                                   @RequestPart(name = "img",required = false) List<MultipartFile> multipartFiles,
+                                                   @RequestPart(name = "img") List<MultipartFile> multipartFiles,
                                                    @Valid @RequestPart(name = "board") CreateBoardRequestDto dto) {
-
-
         BoardResponseDto responseDto = service.create(dto,id,multipartFiles);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
     @GetMapping("/{page}")
     public ResponseEntity<Page<BoardResponseDto>> find(@SessionAttribute("USER_ID") Long id,@PathVariable int page) {
-        Page<BoardResponseDto> boardResponseDtoPage =  service.find(id,page+1);
+        Page<BoardResponseDto> boardResponseDtoPage =  service.find(id,page);
         return new ResponseEntity<>(boardResponseDtoPage, HttpStatus.OK);
     }
 
