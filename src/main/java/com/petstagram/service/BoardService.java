@@ -9,4 +9,8 @@ public interface BoardService {
     BoardResponseDto create(CreateBoardRequestDto dto,Long userId);
 
     Page<BoardResponseDto> find(Long id, int page);
+
+    void updateById(Long userId, String content, Long id);
+
+    void deleteById(Long userId, Long id);
 }
