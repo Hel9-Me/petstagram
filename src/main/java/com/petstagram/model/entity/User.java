@@ -3,7 +3,6 @@ package com.petstagram.model.entity;
 import com.petstagram.model.entity.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -48,5 +47,10 @@ public class User extends Time{
 
     public void disableUserAccount(AccountStatus accountStatus) {
         this.useyn = accountStatus;
+    }
+
+    public void update(String newName, String newPassword) {
+        this.name = newName;
+        this.password = newPassword;
     }
 }
