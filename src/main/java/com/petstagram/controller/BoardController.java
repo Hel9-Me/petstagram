@@ -25,9 +25,8 @@ public class BoardController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
     @GetMapping("/{page}")
-    public ResponseEntity<Page<BoardResponseDto>> find(/*@SessionAttribute Long id,*/@PathVariable int page) {
-        Long id = 1L; //session 추가시 삭제하기
-        Page<BoardResponseDto> boardResponseDtoPage =  service.find(id,page);
+    public ResponseEntity<Page<BoardResponseDto>> find(@SessionAttribute("USER_ID") Long id,@PathVariable int page) {
+        Page<BoardResponseDto> boardResponseDtoPage =  service.find(id,page+1);
         return new ResponseEntity<>(boardResponseDtoPage, HttpStatus.OK);
     }
 }
