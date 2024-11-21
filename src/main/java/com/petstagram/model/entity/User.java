@@ -1,5 +1,6 @@
 package com.petstagram.model.entity;
 
+import com.petstagram.model.entity.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,8 @@ public class User extends Time{
     private String password;
 
     @Column(nullable = false)
-    private Character useyn;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus useyn;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();
@@ -37,10 +39,14 @@ public class User extends Time{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Friend> friendList = new ArrayList<>();
 
-    public User(String name, String email, String password, Character useyn) {
+    public User(String name, String email, String password, AccountStatus useyn) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.useyn = useyn;
+    }
+
+    public void disableUserAccount(AccountStatus accountStatus) {
+        this.useyn = accountStatus;
     }
 }
