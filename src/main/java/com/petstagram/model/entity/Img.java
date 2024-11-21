@@ -22,7 +22,7 @@ public class Img{
     @Column(nullable = false)
     private String saved_name;
 
-    @Column(nullable = false)
+//    @Value("${img.path}")
     private String path;
 
     @Column(nullable = false)
@@ -31,9 +31,6 @@ public class Img{
     @Column(nullable = false)
     private AccountStatus useyn;
 
-    @Lob
-    @Column(name = "img_data", length = 100)
-    private byte[] imgData;
 
     @ManyToOne
     @JoinColumn(name = "board_id")
