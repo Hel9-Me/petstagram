@@ -33,10 +33,11 @@ public class Board extends Time{
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Img> imgList = new ArrayList<>();
 
-    public Board(CreateBoardRequestDto dto, User user) {
+    public Board(CreateBoardRequestDto dto, User user, List<Img> imgList) {
         this.content = dto.getContent();
         this.useyn = AccountStatus.USE;
         this.user = user;
+        this.imgList = imgList;
 
     }
     public void updateContent(String content) {
