@@ -1,4 +1,4 @@
-package com.petstagram.dto;
+package com.petstagram.dto.user;
 
 import com.petstagram.model.entity.User;
 import jakarta.validation.constraints.NotBlank;

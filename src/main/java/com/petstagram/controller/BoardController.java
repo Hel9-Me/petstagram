@@ -1,7 +1,7 @@
 package com.petstagram.controller;
 
-import com.petstagram.model.dto.BoardResponseDto;
-import com.petstagram.model.dto.CreateBoardRequestDto;
+import com.petstagram.dto.board.BoardResponseDto;
+import com.petstagram.dto.board.CreateBoardRequestDto;
 import com.petstagram.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

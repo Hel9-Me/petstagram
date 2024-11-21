@@ -1,4 +1,4 @@
-package com.petstagram.model.dto;
+package com.petstagram.dto.board;
 
 import com.petstagram.model.entity.Board;
 import lombok.Getter;

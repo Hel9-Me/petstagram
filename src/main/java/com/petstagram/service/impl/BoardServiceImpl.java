@@ -1,7 +1,7 @@
-package com.petstagram.service.imp;
+package com.petstagram.service.impl;
 
-import com.petstagram.model.dto.BoardResponseDto;
-import com.petstagram.model.dto.CreateBoardRequestDto;
+import com.petstagram.dto.board.BoardResponseDto;
+import com.petstagram.dto.board.CreateBoardRequestDto;
 import com.petstagram.model.entity.Board;
 import com.petstagram.model.entity.User;
 import com.petstagram.repository.BoardRepository;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImp implements BoardService {
+public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
    private final UserRepository userRepository;
 

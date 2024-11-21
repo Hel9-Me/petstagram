@@ -1,4 +1,4 @@
-package com.petstagram.dto;
+package com.petstagram.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
