@@ -24,13 +24,6 @@ public class FriendService {
         User user = userRepository.findByIdOrElseThrows(friendRequestDto.getUserId());
         User userFollower = userRepository.findByIdOrElseThrows(friendRequestDto.getUserFollowerId());
 
-        if (user == null) {
-            System.out.println("RequestFriend: User is null");
-        }
-        if (userFollower == null) {
-            System.out.println("RequestFriend: UserFollower is null");
-        }
-
         Friend friend = new Friend(user, userFollower);
         friendRepository.save(friend);
 
