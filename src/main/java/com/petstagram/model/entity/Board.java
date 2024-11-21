@@ -1,6 +1,7 @@
 package com.petstagram.model.entity;
 
 import com.petstagram.model.dto.CreateBoardRequestDto;
+import com.petstagram.model.entity.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Board extends Time{
     private String content;
 
     @Column(nullable = false)
-    private Character useyn;
+    private AccountStatus useyn;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,7 +35,7 @@ public class Board extends Time{
 
     public Board(CreateBoardRequestDto dto, User user) {
         this.content = dto.getContent();
-        this.useyn = 'Y';
+        this.useyn = AccountStatus.Y;
         this.user = user;
 
     }
