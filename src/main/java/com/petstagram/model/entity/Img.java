@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Img{
     @Id
-    @Column(name = "image_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "img_id")
     private Long id;
 
     @Column(nullable = false)
@@ -29,6 +29,10 @@ public class Img{
 
     @Column(nullable = false)
     private Character useyn;
+
+    @Lob
+    @Column(name = "img_data", length = 100)
+    private byte[] imgData;
 
 
     @ManyToOne
