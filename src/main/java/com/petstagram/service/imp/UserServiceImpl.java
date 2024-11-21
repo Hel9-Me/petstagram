@@ -1,6 +1,7 @@
 package com.petstagram.service.imp;
 
 import com.petstagram.dto.user.ProfileResponseDto;
+import com.petstagram.enums.AccountStatus;
 import com.petstagram.model.entity.User;
 import com.petstagram.repository.UserRepository;
 import com.petstagram.service.UserService;
@@ -17,8 +18,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     public ProfileResponseDto getProfile(Long id) {
-        User finduser = userRepository.findByIdOrElseThrows(id);
-        return new ProfileResponseDto(finduser);
+        User findUser = userRepository.findByIdOrElseThrows(id);
+
+        if (AccountStatus.NOT_USE.equals(findUser.getUseyn())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "이미 탈퇴한 회원입니다.");
+        }
+
+        return new ProfileResponseDto(findUser);
     }
 
     public ProfileResponseDto updateProfile(Long id, String newName, String password, String newPassword) {
