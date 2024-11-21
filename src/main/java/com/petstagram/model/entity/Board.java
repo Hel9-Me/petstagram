@@ -1,7 +1,7 @@
 package com.petstagram.model.entity;
 
 import com.petstagram.model.dto.CreateBoardRequestDto;
-import com.petstagram.model.entity.enums.AccountStatus;
+import com.petstagram.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class Board extends Time{
 
     public Board(CreateBoardRequestDto dto, User user) {
         this.content = dto.getContent();
-        this.useyn = AccountStatus.Y;
+        this.useyn = AccountStatus.USE;
         this.user = user;
 
     }

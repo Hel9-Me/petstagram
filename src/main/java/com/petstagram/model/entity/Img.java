@@ -1,6 +1,6 @@
 package com.petstagram.model.entity;
 
-import com.petstagram.model.entity.enums.AccountStatus;
+import com.petstagram.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

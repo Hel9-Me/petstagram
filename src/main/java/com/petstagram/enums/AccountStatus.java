@@ -1,8 +1,9 @@
-package com.petstagram.model.entity.enums;
+package com.petstagram.enums;
 
 public enum AccountStatus {
-    Y("계정 활성화"),
-    N("계정 비활성화 ");
+
+    USE("Y"),
+    NOT_USE("N");
 
     private final String message;
 

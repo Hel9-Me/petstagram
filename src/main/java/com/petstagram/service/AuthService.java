@@ -1,6 +1,6 @@
 package com.petstagram.service;
 
-import com.petstagram.model.entity.enums.AccountStatus;
+import com.petstagram.enums.AccountStatus;
 import com.petstagram.repository.UserRepository;
 import com.petstagram.util.PasswordEncoder;
 import com.petstagram.model.entity.User;
@@ -26,7 +26,7 @@ public class AuthService {
 
             // 탈퇴한 회원 회원가입 시 예외처리
             // TODO: 탈퇴 사용자 재가입 시 어떤 상태 코드로 예외처리를 해야할 지 의논 필요
-            if (AccountStatus.N.equals(findUser.get().getUseyn())) {
+            if (AccountStatus.NOT_USE.equals(findUser.get().getUseyn())) {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "이미 탈퇴한 회원으로 계정이 비활성화 되었습니다.");
             }
 
@@ -36,7 +36,7 @@ public class AuthService {
 
         String hashedPassword = PasswordEncoder.encode(password);
 
-        User user = new User(name, email, hashedPassword, AccountStatus.Y);
+        User user = new User(name, email, hashedPassword, AccountStatus.USE);
 
         userRepository.save(user);
     }
@@ -46,7 +46,7 @@ public class AuthService {
         User findUser = userRepository.findByUserOrElseThrow(email);
 
         // 탈퇴한 회원 로그인 예외처리
-        if (AccountStatus.N.equals(findUser.getUseyn())) {
+        if (AccountStatus.NOT_USE.equals(findUser.getUseyn())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "이미 탈퇴한 회원으로 로그인이 불가합니다.");
         }
 
@@ -61,6 +61,6 @@ public class AuthService {
     public void leave(Long userId) {
         User findUser = userRepository.findByIdOrElseThrows(userId);
 
-        findUser.disableUserAccount(AccountStatus.N);
+        findUser.disableUserAccount(AccountStatus.NOT_USE);
     }
 }
