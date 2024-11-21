@@ -66,5 +66,20 @@ public class AuthController {
 
         return new ResponseEntity<>("로그아웃이 되었습니다.", HttpStatus.OK);
     }
+
+    @DeleteMapping("/leave")
+    public ResponseEntity<String> leave(@SessionAttribute("USER_ID") Long userId, HttpServletRequest request){
+
+        userService.leave(userId);
+        log.info("{}", userId);
+
+        // 탈퇴 완료 후, 로그아웃 처리
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok().body("탈퇴가 완료되었습니다. 이용해 주셔서 감사합니다.");
+    }
 }
 
