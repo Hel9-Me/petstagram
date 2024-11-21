@@ -2,6 +2,7 @@ package com.petstagram.controller;
 
 import com.petstagram.dto.board.BoardResponseDto;
 import com.petstagram.dto.board.CreateBoardRequestDto;
+import com.petstagram.dto.board.UpdateBoardRequestDto;
 import com.petstagram.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,21 @@ public class BoardController {
         Page<BoardResponseDto> boardResponseDtoPage =  service.find(id,page+1);
         return new ResponseEntity<>(boardResponseDtoPage, HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> update(@SessionAttribute(name = "USER_ID", required = false) Long userId, @RequestBody UpdateBoardRequestDto requestDto, @PathVariable Long id) {
+
+        service.updateById(userId, requestDto.getContent(), id);
+
+        return new ResponseEntity<>("게시글이 수정되었습니다.", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@SessionAttribute(name = "USER_ID", required = false) Long userId, @PathVariable Long id) {
+
+        service.deleteById(userId, id);
+
+        return new ResponseEntity<>("게시글이 삭제되었습니다.",HttpStatus.OK);
+    }
+
 }

@@ -11,8 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Transactional
 @Service
@@ -35,6 +37,30 @@ public class BoardServiceImpl implements BoardService {
         Page<BoardResponseDto> boardResponseDtoPage = boardRepository.findAllByUserId(id, pageRequest).map(m -> new BoardResponseDto(m));
 
         return boardResponseDtoPage;
+    }
+
+    @Override
+    public void updateById(Long userId, String content, Long id) {
+        Board findBoard = boardRepository.findBoardByIdOrElseThrow(id);
+
+        if (!userId.equals(findBoard.getUser().getId())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "게시글을 수정할 권한이 없습니다.");
+
+        }
+        findBoard.updateContent(content);
+
+    }
+
+    @Override
+    public void deleteById(Long userId, Long id) {
+        Board findBoard = boardRepository.findBoardByIdOrElseThrow(id);
+
+        if (!userId.equals(findBoard.getUser().getId())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "게시글을 삭제할 권한이 없습니다.");
+
+        }
+
+        boardRepository.delete(findBoard);
     }
 
 }
