@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Table(name = "img")
@@ -35,4 +37,12 @@ public class Img{
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
+
+    public Img(String originalFilename) {
+        String[] fileName = originalFilename.split("\\.");
+        this.name = fileName[0];
+        this.ext = fileName[1];
+        this.useyn = AccountStatus.USE;
+        this.saved_name=UUID.randomUUID().toString();
+    }
 }
