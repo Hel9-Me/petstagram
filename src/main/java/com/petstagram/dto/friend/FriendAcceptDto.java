@@ -24,6 +24,9 @@ public class FriendAcceptDto {
      */
     private Long userFollowerId; // 친구 요청을 수락할 사용자 ID
 
+    public FriendAcceptDto() {
+    }
+
     public FriendAcceptDto(Long userFollowerId) {
         this.userFollowerId = userFollowerId;
     }
