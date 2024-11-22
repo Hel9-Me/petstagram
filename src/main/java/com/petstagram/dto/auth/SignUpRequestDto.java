@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class SignUpRequestDto {
 
     @NotBlank(message = "올바른 이름을 입력해주세요")
@@ -20,5 +19,9 @@ public class SignUpRequestDto {
     private String password;
 
 
-
+    public SignUpRequestDto(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }

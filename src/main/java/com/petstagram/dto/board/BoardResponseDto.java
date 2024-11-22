@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
 public class BoardResponseDto {
     Long boardId;
     String content;

@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
  * Lombok을 사용하여 getter, 생성자 등을 자동으로 생성합니다.
  */
 @Getter
-@NoArgsConstructor // 기본 생성자를 자동 생성합니다.
-@AllArgsConstructor // 모든 필드를 인자로 받는 생성자를 자동 생성합니다.
 public class FriendResponseDto {
 
     /**
@@ -32,4 +30,9 @@ public class FriendResponseDto {
      * true이면 수락된 상태, false이면 수락되지 않은 상태입니다.
      */
     private boolean isAccepted; // 친구 요청 수락 상태
+
+    public FriendResponseDto(Long userFollowerId, boolean isAccepted) {
+        this.userFollowerId = userFollowerId;
+        this.isAccepted = isAccepted;
+    }
 }
