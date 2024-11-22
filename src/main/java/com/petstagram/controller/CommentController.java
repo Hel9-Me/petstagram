@@ -25,6 +25,11 @@ public class CommentController {
         return new ResponseEntity<>(commentResponseDto, HttpStatus.OK);
     }
 
-
+    @GetMapping("/{boardId}")
+    public ResponseEntity<List<CommentResponseDto>> find(@SessionAttribute(name = "USER_ID") Long userId,
+                                                         @PathVariable Long boardId) {
+        List<CommentResponseDto> commentResponseDtos = commentService.find(userId, boardId);
+        return new ResponseEntity<>(commentResponseDtos, HttpStatus.OK);
+    }
 
 }
