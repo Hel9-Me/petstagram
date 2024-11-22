@@ -8,6 +8,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,6 +33,9 @@ public class Comment extends Time{
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+    private List<Like> likes = new ArrayList<>(); // 댓글에 대한 좋아요 목록
 
     public Comment(CreateCommentRequestDto dto,Board board) {
         this.comment = dto.getComment();
