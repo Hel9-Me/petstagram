@@ -45,7 +45,7 @@ public class Comment extends Time{
     }
 
     public void update(CommentRequestDto dto) {
-        this.comment = dto.getPassword();
+        this.comment = dto.getComment();
     }
 
 }
