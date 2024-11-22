@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
  * Lombok을 사용하여 getter, 생성자 등을 자동으로 생성합니다.
  */
 @Getter
-@NoArgsConstructor // 기본 생성자를 자동 생성합니다.
-@AllArgsConstructor // 모든 필드를 인자로 받는 생성자를 자동 생성합니다.
 public class FriendRequestDto {
 
     /**
@@ -32,4 +30,9 @@ public class FriendRequestDto {
      * 요청을 받은 사용자에 대한 정보를 관리하는 데 필요합니다.
      */
     private Long userFollowerId; // 친구 요청을 받은 사용자 ID
+
+    public FriendRequestDto(Long userId, Long userFollowerId) {
+        this.userId = userId;
+        this.userFollowerId = userFollowerId;
+    }
 }
