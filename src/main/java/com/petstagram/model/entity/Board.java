@@ -36,6 +36,9 @@ public class Board extends Time{
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Like> likes = new ArrayList<>(); // 좋아요 목록
+
     public Board(CreateBoardRequestDto dto, User user, List<Img> imgList) {
         this.content = dto.getContent();
         this.useyn = AccountStatus.USE;
