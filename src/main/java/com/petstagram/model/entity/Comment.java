@@ -1,6 +1,7 @@
 package com.petstagram.model.entity;
 
 import com.petstagram.common.constants.AccountStatus;
+import com.petstagram.dto.comment.CommentRequestDto;
 import com.petstagram.dto.comment.CreateCommentRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -36,4 +37,9 @@ public class Comment extends Time{
         this.board = board;
         this.user = board.getUser();
     }
+
+    public void update(CommentRequestDto dto) {
+        this.comment = dto.getPassword();
+    }
+
 }

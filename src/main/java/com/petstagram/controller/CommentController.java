@@ -1,5 +1,6 @@
 package com.petstagram.controller;
 
+import com.petstagram.dto.comment.CommentRequestDto;
 import com.petstagram.dto.comment.CommentResponseDto;
 import com.petstagram.dto.comment.CreateCommentRequestDto;
 import com.petstagram.service.CommentService;
@@ -30,6 +31,16 @@ public class CommentController {
                                                          @PathVariable Long boardId) {
         List<CommentResponseDto> commentResponseDtos = commentService.find(userId, boardId);
         return new ResponseEntity<>(commentResponseDtos, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{commentId}")
+    public ResponseEntity<CommentResponseDto> update(@SessionAttribute(name = "USER_ID") Long userId,
+                                                     @PathVariable Long commentId,
+                                                     @Valid @RequestBody CommentRequestDto dto) {
+
+        CommentResponseDto commentResponseDto = commentService.update(userId, commentId, dto);
+        return new ResponseEntity<>(commentResponseDto, HttpStatus.OK);
+
     }
 
 }
