@@ -3,6 +3,7 @@ package com.petstagram.controller;
 import com.petstagram.dto.comment.CommentRequestDto;
 import com.petstagram.dto.comment.CommentResponseDto;
 import com.petstagram.dto.comment.CreateCommentRequestDto;
+import com.petstagram.dto.comment.DeleteCommentRequestDto;
 import com.petstagram.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,14 @@ public class CommentController {
         CommentResponseDto commentResponseDto = commentService.update(userId, commentId, dto);
         return new ResponseEntity<>(commentResponseDto, HttpStatus.OK);
 
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> delete(@SessionAttribute(name = "USER_ID") Long userId,
+                                       @PathVariable Long commentId,
+                                       @Valid @RequestBody DeleteCommentRequestDto dto) {
+        commentService.delete(userId, commentId, dto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

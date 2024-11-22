@@ -7,6 +7,7 @@ import com.petstagram.common.exception.CustomException;
 import com.petstagram.dto.comment.CommentRequestDto;
 import com.petstagram.dto.comment.CommentResponseDto;
 import com.petstagram.dto.comment.CreateCommentRequestDto;
+import com.petstagram.dto.comment.DeleteCommentRequestDto;
 import com.petstagram.model.entity.Board;
 import com.petstagram.model.entity.Comment;
 import com.petstagram.model.entity.User;
@@ -59,16 +60,29 @@ public class CommentServiceImpl implements CommentService {
         //유효성 검사
 
         Comment comment = commentRepository.findByIdOrElseThrows(commentId);
-        User user = comment.getUser();
-        if (!PasswordEncoder.matches(dto.getPassword(),user.getPassword())) {
-            throw new CustomException(UserErrorCode.PASSWORD_INCORRECT);
-        }
-        if (!userId.equals(user.getId()) || !userId.equals(comment.getBoard().getId())) {
-            throw new CustomException(CommentErrorCode.INVALID_ACCESS);
-        }
+        //todo 게시물 작성자, 댓글 작성자 비밀번호 확인
+        validateAccessUser(userId,dto.getPassword(), comment);
 
         comment.update(dto);
 
         return new CommentResponseDto(comment);
+    }
+
+    @Override
+    public void delete(Long userId, Long commentId, DeleteCommentRequestDto dto) {
+        Comment comment = commentRepository.findByIdOrElseThrows(commentId);
+        validateAccessUser(userId,dto.getPassword(),comment);
+        commentRepository.delete(comment);
+    }
+
+    private static void validateAccessUser(Long userId, String password, Comment comment) {
+        User commentWriter = comment.getUser();
+        User boardWriter = comment.getBoard().getUser();
+        if (!PasswordEncoder.matches(password, commentWriter.getPassword())||!PasswordEncoder.matches(password,boardWriter.getPassword())) {
+            throw new CustomException(UserErrorCode.PASSWORD_INCORRECT);
+        }
+        if (!userId.equals(commentWriter.getId()) || !userId.equals(boardWriter.getId())) {
+            throw new CustomException(CommentErrorCode.INVALID_ACCESS);
+        }
     }
 }
