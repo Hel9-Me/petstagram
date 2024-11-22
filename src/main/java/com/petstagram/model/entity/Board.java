@@ -1,7 +1,7 @@
 package com.petstagram.model.entity;
 
 import com.petstagram.dto.board.CreateBoardRequestDto;
-import com.petstagram.enums.AccountStatus;
+import com.petstagram.common.constants.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
