@@ -1,10 +1,12 @@
 package com.petstagram.controller;
 
 
+import com.petstagram.common.constants.UserErrorCode;
+import com.petstagram.common.exception.CustomException;
 import com.petstagram.dto.auth.LoginRequestDto;
 import com.petstagram.dto.auth.SignUpRequestDto;
-import com.petstagram.service.AuthService;
 import com.petstagram.model.entity.User;
+import com.petstagram.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -45,7 +46,7 @@ public class AuthController {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("USER_ID") != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 로그인 되었습니다.");
+            throw new CustomException(UserErrorCode.ALREADY_LOGINED_USER);
         }
 
         session.setAttribute("USER_ID", loginUser.getId());
