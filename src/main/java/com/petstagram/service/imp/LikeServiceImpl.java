@@ -61,7 +61,6 @@ public class LikeServiceImpl implements LikeService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 좋아요를 눌렀습니다.");
         }
 
-        // 좋아요 저장
         Like like = new Like(user, board, comment);
         Like savedLike = likeRepository.save(like);
 
