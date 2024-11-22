@@ -1,5 +1,7 @@
 package com.petstagram.service.imp;
 
+import com.petstagram.common.constants.FriendErrorCode;
+import com.petstagram.common.exception.CustomException;
 import com.petstagram.dto.friend.FriendAcceptDto;
 import com.petstagram.dto.friend.FriendRequestDto;
 import com.petstagram.dto.friend.FriendResponseDto;
@@ -9,9 +11,7 @@ import com.petstagram.repository.FriendRepository;
 import com.petstagram.repository.UserRepository;
 import com.petstagram.service.FriendService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 /**
  * 친구 관계를 관리하는 서비스 클래스입니다.
@@ -62,7 +62,7 @@ public class FriendServiceImpl implements FriendService {
 
         // 수락되지 않은 친구 요청을 찾음 (친구 관계가 존재하지 않으면 예외 발생)
         Friend friend = friendRepository.findByUserFollowerAndIsAcceptedFalse(userFollower)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "친구 요청을 찾을 수 없습니다."));
+                .orElseThrow(() ->new CustomException(FriendErrorCode.NOT_FOUND_INVITED));
 
         // 친구 요청을 수락 처리
         friend.accept();
@@ -87,7 +87,7 @@ public class FriendServiceImpl implements FriendService {
 
         // 두 사용자의 친구 관계를 찾아서 삭제 (친구 관계가 존재하지 않으면 예외 발생)
         Friend friend = friendRepository.findByUserAndUserFollower(user, userFollower)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "친구 관계를 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomException(FriendErrorCode.NOT_FOUND));
 
         // 친구 관계 삭제
         friendRepository.delete(friend);

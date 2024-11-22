@@ -1,13 +1,13 @@
 package com.petstagram.repository;
 
+import com.petstagram.common.constants.BoardErrorCode;
+import com.petstagram.common.exception.CustomException;
 import com.petstagram.model.entity.Board;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -20,7 +20,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     default Board findBoardByIdOrElseThrow(Long id) {
         return findBoardById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.")
+                new CustomException(BoardErrorCode.NOT_FOUND)
         );
     }
 }

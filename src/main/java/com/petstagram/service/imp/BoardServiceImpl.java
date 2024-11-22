@@ -1,5 +1,7 @@
 package com.petstagram.service.imp;
 
+import com.petstagram.common.constants.BoardErrorCode;
+import com.petstagram.common.exception.CustomException;
 import com.petstagram.dto.board.BoardResponseDto;
 import com.petstagram.dto.board.CreateBoardRequestDto;
 import com.petstagram.model.entity.Board;
@@ -10,13 +12,12 @@ import com.petstagram.repository.UserRepository;
 import com.petstagram.service.BoardService;
 import com.petstagram.util.ImgUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -29,19 +30,27 @@ public class BoardServiceImpl implements BoardService {
     private final UserRepository userRepository;
     private final ImgUtils imgUtils;
 
+    @Value("{img.path}")
+    String path;
+
+
+
     @Transactional
     @Override
     public BoardResponseDto create(CreateBoardRequestDto dto, Long userId, List<MultipartFile> multipartFiles) {
 
-
+//유효성 검사
+        User user = userRepository.findByIdOrElseThrows(userId);
 
         //이미지 로컬에 저장
         List<Img> imgList = multipartFiles.stream()
                 .map(m -> new Img(m.getOriginalFilename()))
                 .toList();
+
         imgUtils.fileUpload(multipartFiles,  imgList);
 
-        User user = userRepository.findByIdOrElseThrows(userId);
+//        List<Img> imgList1 = imgUtils.saveToMultipartFile(multipartFiles);
+
         Board board = new Board(dto, user,imgList);
         Board savedBoard = boardRepository.save(board);
 
@@ -61,8 +70,7 @@ public class BoardServiceImpl implements BoardService {
         Board findBoard = boardRepository.findBoardByIdOrElseThrow(id);
 
         if (!userId.equals(findBoard.getUser().getId())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "게시글을 수정할 권한이 없습니다.");
-
+            throw new CustomException(BoardErrorCode.INVALID_ACCESS);
         }
         findBoard.updateContent(content);
 
@@ -73,7 +81,7 @@ public class BoardServiceImpl implements BoardService {
         Board findBoard = boardRepository.findBoardByIdOrElseThrow(id);
 
         if (!userId.equals(findBoard.getUser().getId())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "게시글을 삭제할 권한이 없습니다.");
+            throw new CustomException(BoardErrorCode.INVALID_ACCESS);
 
         }
 
