@@ -26,9 +26,14 @@ public class Comment extends Time{
     @JoinColumn(name = "board_id")
     private Board board;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comment(CreateCommentRequestDto dto,Board board) {
         this.comment = dto.getComment();
         this.useyn = AccountStatus.USE.toString();
         this.board = board;
+        this.user = board.getUser();
     }
 }
