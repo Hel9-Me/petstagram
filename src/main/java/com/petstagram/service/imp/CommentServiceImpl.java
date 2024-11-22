@@ -35,4 +35,18 @@ public class CommentServiceImpl implements CommentService {
         return new CommentResponseDto(savedComment);
     }
 
+    @Override
+    public List<CommentResponseDto> find(Long userId, Long boardId) {
+        //유효성 검사
+        userRepository.findByIdOrElseThrows(userId);
+        List<Comment> commentByBoardId = commentRepository.findByBoard_Id(boardId);
+        if(commentByBoardId.isEmpty()) {
+            throw new CustomException(BoardErrorCode.NOT_FOUND);
+        }
+
+        return commentByBoardId.stream()
+                .map(m -> new CommentResponseDto(m))
+                .toList();
+
+    }
 }

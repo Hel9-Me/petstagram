@@ -8,4 +8,5 @@ import java.util.List;
 public interface CommentService {
     CommentResponseDto create(Long userId, Long boardId, CreateCommentRequestDto dto);
 
+    List<CommentResponseDto> find(Long userId, Long boardId);
 }
