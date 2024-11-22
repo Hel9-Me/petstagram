@@ -38,19 +38,8 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     @Override
     public BoardResponseDto create(CreateBoardRequestDto dto, Long userId, List<MultipartFile> multipartFiles) {
-
-//유효성 검사
         User user = userRepository.findByIdOrElseThrows(userId);
-
-        //이미지 로컬에 저장
-        List<Img> imgList = multipartFiles.stream()
-                .map(m -> new Img(m.getOriginalFilename()))
-                .toList();
-
-        imgUtils.fileUpload(multipartFiles,  imgList);
-
-//        List<Img> imgList1 = imgUtils.saveToMultipartFile(multipartFiles);
-
+        List<Img> imgList = imgUtils.saveToMultipartFile(multipartFiles);
         Board board = new Board(dto, user,imgList);
         Board savedBoard = boardRepository.save(board);
 

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class Img{
     @Column(nullable = false)
     private String saved_name;
 
-    @Value("${img.path}") //todo 적용 안되는 문제 확인하기
+    @Column(nullable = false)
     private String path;
 
     @Column(nullable = false)
@@ -39,11 +38,13 @@ public class Img{
     @JoinColumn(name = "board_id")
     private Board board;
 
-    public Img(String originalFilename) {
+    public Img(String originalFilename,String path) {
         String[] fileName = originalFilename.split("\\.");
         this.name = fileName[0];
         this.ext = fileName[1];
         this.useyn = AccountStatus.USE;
         this.saved_name=UUID.randomUUID().toString();
+
+        this.path = path;
     }
 }
