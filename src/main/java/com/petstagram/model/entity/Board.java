@@ -1,7 +1,7 @@
 package com.petstagram.model.entity;
 
-import com.petstagram.dto.board.CreateBoardRequestDto;
 import com.petstagram.common.constants.AccountStatus;
+import com.petstagram.dto.board.CreateBoardRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,6 +32,9 @@ public class Board extends Time{
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Img> imgList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
 
     public Board(CreateBoardRequestDto dto, User user, List<Img> imgList) {
         this.content = dto.getContent();
