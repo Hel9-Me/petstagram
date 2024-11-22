@@ -1,4 +1,4 @@
-package com.petstagram.dto;
+package com.petstagram.dto.comment;
 
 import com.petstagram.model.entity.Comment;
 import lombok.Getter;

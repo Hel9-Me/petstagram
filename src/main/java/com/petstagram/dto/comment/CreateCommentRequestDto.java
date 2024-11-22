@@ -1,4 +1,4 @@
-package com.petstagram.dto;
+package com.petstagram.dto.comment;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
