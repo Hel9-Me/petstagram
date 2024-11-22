@@ -1,7 +1,7 @@
 package com.petstagram.controller;
 
-import com.petstagram.dto.CommentResponseDto;
-import com.petstagram.dto.CreateCommentRequestDto;
+import com.petstagram.dto.comment.CommentResponseDto;
+import com.petstagram.dto.comment.CreateCommentRequestDto;
 import com.petstagram.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

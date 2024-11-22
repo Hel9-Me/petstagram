@@ -1,7 +1,7 @@
 package com.petstagram.service;
 
-import com.petstagram.dto.CommentResponseDto;
-import com.petstagram.dto.CreateCommentRequestDto;
+import com.petstagram.dto.comment.CommentResponseDto;
+import com.petstagram.dto.comment.CreateCommentRequestDto;
 
 import java.util.List;
 

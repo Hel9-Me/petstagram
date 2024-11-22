@@ -2,8 +2,8 @@ package com.petstagram.service.imp;
 
 import com.petstagram.common.constants.BoardErrorCode;
 import com.petstagram.common.exception.CustomException;
-import com.petstagram.dto.CommentResponseDto;
-import com.petstagram.dto.CreateCommentRequestDto;
+import com.petstagram.dto.comment.CommentResponseDto;
+import com.petstagram.dto.comment.CreateCommentRequestDto;
 import com.petstagram.model.entity.Board;
 import com.petstagram.model.entity.Comment;
 import com.petstagram.model.entity.User;
