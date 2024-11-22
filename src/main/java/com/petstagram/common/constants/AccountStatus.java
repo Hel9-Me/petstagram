@@ -1,4 +1,4 @@
-package com.petstagram.enums;
+package com.petstagram.common.constants;
 
 public enum AccountStatus {
 
