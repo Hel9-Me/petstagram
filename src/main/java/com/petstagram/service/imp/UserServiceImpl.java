@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if(password.equals(newPassword)) {
-            throw new CustomException(UserErrorCode.DUPLICATED_EMAIL);
+            throw new CustomException(UserErrorCode.INVALID_PASSWORD);
         }
 
         String hashedPassword = PasswordEncoder.encode(newPassword);
