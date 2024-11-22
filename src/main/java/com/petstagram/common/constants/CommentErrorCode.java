@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum CommentErrorCode implements ErrorCode {
-
-    NOT_FOUND(HttpStatus.NOT_FOUND,"게시물을 찾을 수 없습니다")
+    INVALID_ACCESS(HttpStatus.UNAUTHORIZED,"댓글 변경 권한이 없습니다"),
+    NOT_FOUND(HttpStatus.NOT_FOUND,"댓글을 찾을 수 없습니다")
     ;
 
 

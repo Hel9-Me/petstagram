@@ -1,7 +1,10 @@
 package com.petstagram.service.imp;
 
 import com.petstagram.common.constants.BoardErrorCode;
+import com.petstagram.common.constants.CommentErrorCode;
+import com.petstagram.common.constants.UserErrorCode;
 import com.petstagram.common.exception.CustomException;
+import com.petstagram.dto.comment.CommentRequestDto;
 import com.petstagram.dto.comment.CommentResponseDto;
 import com.petstagram.dto.comment.CreateCommentRequestDto;
 import com.petstagram.model.entity.Board;
@@ -11,6 +14,7 @@ import com.petstagram.repository.BoardRepository;
 import com.petstagram.repository.CommentRepository;
 import com.petstagram.repository.UserRepository;
 import com.petstagram.service.CommentService;
+import com.petstagram.util.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +52,23 @@ public class CommentServiceImpl implements CommentService {
                 .map(m -> new CommentResponseDto(m))
                 .toList();
 
+    }
+
+    @Override
+    public CommentResponseDto update(Long userId, Long commentId, CommentRequestDto dto) {
+        //유효성 검사
+
+        Comment comment = commentRepository.findByIdOrElseThrows(commentId);
+        User user = comment.getUser();
+        if (!PasswordEncoder.matches(dto.getPassword(),user.getPassword())) {
+            throw new CustomException(UserErrorCode.PASSWORD_INCORRECT);
+        }
+        if (!userId.equals(user.getId()) || !userId.equals(comment.getBoard().getId())) {
+            throw new CustomException(CommentErrorCode.INVALID_ACCESS);
+        }
+
+        comment.update(dto);
+
+        return new CommentResponseDto(comment);
     }
 }
