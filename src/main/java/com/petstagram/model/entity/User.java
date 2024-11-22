@@ -38,6 +38,9 @@ public class User extends Time{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Friend> friendList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
+
     public User(String name, String email, String password, AccountStatus useyn) {
         this.name = name;
         this.email = email;
